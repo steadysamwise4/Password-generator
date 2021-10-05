@@ -15,6 +15,7 @@ var lengthCollect = function() {
 
     if (promptLength >= 8 && promptLength <= 128) {
     //console.log("Your password length is " + promptLength);
+    console.log(promptLength);
     return promptLength;
         }
     
@@ -56,59 +57,75 @@ var specialConfirm = function() {
     return false;
 };
 
-
+var generateBtn = document.querySelector("#generate");
 
 // global variables
-var getLength = lengthCollect();
-var isLow = lowerConfirm();
-var isUp = upperConfirm();
-var isNum = numConfirm();
-var isSpec = specialConfirm();
+const getLength = lengthCollect();
+const isLow = lowerConfirm();
+const isUp = upperConfirm();
+const isNum = numConfirm();
+const isSpec = specialConfirm();
 
-// object containing the 4 random character types
-const randomTypes = {
-    low: getLower,
-    up: getUpper,
-    Num: getNumeric,
-    Spec: getSpecial
-}
+
+
 console.log(getLength);
 console.log(isLow);
 console.log(isUp);
 console.log(isNum);
 console.log(isSpec);
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword());
-
-// Write password to the #password input
-function writePassword() {
-    var length = getLength;
-    var hasLower = isLow;
-    var hasUpper = isUp;
-    var hasNumber = isNum;
-    var hasSpecial = isSpec;
-    var password = generatePassword(hasLower, hasUpper, hasNumber, hasSpecial, length);
-    var passwordText = document.querySelector("#password");
+  // Add event listener to generate button
+generateBtn.addEventListener("click", () => {
+    /*const length = getLength;
+    const hasLower = isLow;
+    const hasUpper = isUp;
+    const hasNumber = isNum;
+    const hasSpecial = isSpec; */
+    const password = generatePassword(isLow, isUp, isNum, isSpec, getLength);
+    const passwordText = document.querySelector("#password");
   
     passwordText.value = password;
   
-  };
+
+});
+
 
   // function to generate the password
-var generatePassword = function() {}
+function generatePassword(low, up, num, spec, getLength) {
+    let myPassword = "";
+    const typesCount = isLow + isUp + isNum + isSpec;
+    const typesArr = [{low}, {up}, {num}, {spec}].filter(item => Object.values(item)[0]);
+
+    // must have 2 or more character types
+    if (typesCount < 2) {
+        window.alert("You must select at least 2 types of characters. Please try again.");
+        lowerConfirm();
+        upperConfirm();
+        numConfirm();
+        specialConfirm();
+        generatePassword();
+    }else {
+    
+        for (var i=0; i<getLength; i+=typesCount) {
+            typesArr.forEach(type => {
+                const funcName = Object.keys(type)[0];
+                myPassword += randomFunc[funcName]();
+            });
+        }
+        const userPassword = myPassword.slice(0, length);
+        return userPassword;
+    }
+}
 // Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
+
+const randomFunc = {
+rLow: low,
+rUp: up,
+rNum: num,
+rSpec: spec
+}
 
 
-
-
-
-
-    const length = lengthCollect();
-    /*const hasLower =  ;
-    const hasUpper =  ;
-    const hasNumeric =  ;
-    const hasSpecial =  ; */
+    
 
 
 
@@ -116,22 +133,26 @@ var generateBtn = document.querySelector("#generate");
 
 
 
+// random Character functions
 
-// Character getting functions
-
-var getLower = function() {
+function getLower() {
     return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
 }
-var getUpper = function() {
+function getUpper() {
     return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
 }
-var getNumeric = function() {
+function getNumeric() {
     return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
 }
-var getSpecial = function() {
+function getSpecial() {
     const special = "!@#$%^&*()_-+="
     return special[Math.floor(Math.random() * special.length)];
 }
+
+var low = getLower();
+var up = getUpper();
+var num = getNumeric();
+var spec = getSpecial();
 
 
 //lengthCollect();
