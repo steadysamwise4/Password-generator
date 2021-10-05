@@ -1,8 +1,8 @@
 function myFunction() {
     var length = window.prompt("Enter a length between 8 and 128");
-    if (length < 8 || length > 128) {
+    while (length < 8 || length > 128) {
         length = window.prompt("Your response is invalid. Try again.");
-    }else {
+    } 
         var confirmUp = window.confirm("Do you wish to include upper case characters?");
         var confirmNum = window.confirm("Do you wish to include numeric characters?");
         var confirmSymb = window.confirm("Do you wish to include symbols?");
@@ -12,14 +12,36 @@ function myFunction() {
             var charLength = 70;
         }
         if (!confirmUp) {
-            var characters = "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*"
+            var characters = "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
             var charLength = 44;
         }
-        //if (confirmAll)
-    //let letters = "acdefghijklmnopqrstuvwxyz";
-
+        if (!confirmNum) {
+            var characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*";
+            var charLength = 60;
+        }
+        if (!confirmSymb) {
+            var characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var charLength = 62;
+        }
+        if (!confirmNum && !confirmSymb) {
+            var characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            var charLength = 52;
+        }
+        if (!confirmUp && !confirmSymb) {
+            var characters = "acdefghijklmnopqrstuvwxyz0123456789";
+            var charLength = 36;
+        }
+        if (!confirmUp && !confirmNum) {
+            var characters = "acdefghijklmnopqrstuvwxyz!@#$%^&*";
+            var charLength = 34;
+        }
+        if (!confirmUp && !confirmNum && !confirmSymb){
+            var characters = "acdefghijklmnopqrstuvwxyz";
+            var charLength = 26;
+        
+      
     }
-  // let letters = "0123456789"
+  
     password = ""; 
     
     for (var i = 0;i < length;i++) {
@@ -34,3 +56,4 @@ function myFunction() {
    // ABCDEFGHIJKLMNOPQRSTUVWXYZ
    // 0123456789
     // !@#$%^&*
+    // abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*
