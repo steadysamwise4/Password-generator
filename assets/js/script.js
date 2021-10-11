@@ -1,8 +1,12 @@
+// function to generate the password
 function myFunction() {
+    // aquire user input for length of password
     var length = window.prompt("Enter a length between 8 and 128");
+    //validation of user data
     while (length < 8 || length > 128) {
         length = window.prompt("Your response is invalid. Try again.");
     } 
+    // variables and conditional statements to get user data and apply it to the password
         var confirmUp = window.confirm("Do you wish to include upper case characters?");
         var confirmNum = window.confirm("Do you wish to include numeric characters?");
         var confirmSymb = window.confirm("Do you wish to include symbols?");
@@ -43,13 +47,13 @@ function myFunction() {
     }
   
     password = ""; 
-    
+    // iteration of charachter strings to generate random password
     for (var i = 0;i < length;i++) {
       let generate = characters[Math.floor(Math.random() * charLength)];
       password += generate;
     }
     
-    
+    // connects generated password to the designated text area
     let parent = document.getElementById("password").innerHTML = password;
    
   }
