@@ -7,7 +7,7 @@ This has been the toughest project so far in the bootcamp. I struggled with the 
 ## Links
 Below is a link to the deployed page and a screenshot of how it appears in the browser.
 
-
+https://steadysamwise4.github.io/Password-generator/
 
 ![Password-generator](./assets/images/password.png)
 
